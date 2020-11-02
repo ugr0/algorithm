@@ -1,5 +1,5 @@
 //
-// dijkstra　O(E log(V))
+// dijkstra O(E log(V))
 // https://atcoder.jp/contests/joi2008yo/tasks/joi2008yo_f
 //
 
@@ -7,16 +7,16 @@
 using namespace std;
 #define rep(i,n) for(int i=0; i<(n); ++i)
 using ll = long long;
+using pll = pair<ll,ll>;
 const ll INF = (1LL << 60);
 
-struct edge{ll to, cost;};
-typedef pair<ll,ll> P;
-struct graph{
+struct Edge{ll to, cost;};
+struct Graph{
     ll V;
-    vector<vector<edge> > G;
+    vector<vector<Edge> > G;
     vector<ll> d;
 
-    graph(ll n){
+    Graph(ll n){
         init(n);
     }
 
@@ -30,7 +30,7 @@ struct graph{
     }
 
     void add_edge(ll s, ll t, ll cost){
-        edge e;
+        Edge e;
         e.to = t, e.cost = cost;
         G[s].push_back(e);
     }
@@ -38,16 +38,16 @@ struct graph{
     void dijkstra(ll s){
         rep(i,V) d[i] = INF;
         d[s] = 0;
-        priority_queue<P,vector<P>, greater<P> > que;
-        que.push(P(0,s));
+        priority_queue<pll,vector<pll>, greater<pll> > que;
+        que.push(pll(0,s));
         while(!que.empty()){
-            P p = que.top(); que.pop();
+            pll p = que.top(); que.pop();
             ll v = p.second;
             if(d[v]<p.first) continue;
             for(auto e : G[v]){
                 if(d[e.to]>d[v]+e.cost){
                     d[e.to] = d[v]+e.cost;
-                    que.push(P(d[e.to],e.to));
+                    que.push(pll(d[e.to],e.to));
                 }
             }
         }
@@ -61,7 +61,7 @@ int main(){
 
     int n, k; cin >> n >> k;
     //n頂点のグラフを作成
-    graph g(n);
+    Graph g(n);
 
     rep(i,k){
         int x; cin >> x;

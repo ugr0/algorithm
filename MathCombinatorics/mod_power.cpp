@@ -1,5 +1,5 @@
 //
-// 累乗　a^n mod. m   O(log√n)
+// 累乗 a^n mod. m   O(log√n)
 //
 
 
