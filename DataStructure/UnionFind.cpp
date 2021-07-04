@@ -19,6 +19,8 @@ struct UnionFind {
 
   explicit UnionFind(size_t sz) : data(sz, -1) {}
 
+  void init(int sz) { data.resize(sz, -1); }
+
   bool unite(int x, int y) {
     x = find(x), y = find(y);
     if (x == y) return false;
